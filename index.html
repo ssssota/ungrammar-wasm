@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ungrammar WASM</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css"
+    />
+    <style>
+      textarea {
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Ungrammar WASM</h1>
+    </header>
+    <main>
+      <textarea id="input">
+/// ungrammar for ungrammar
+Grammar =
+  Node *
+
+Node =
+  name:'ident' '=' Rule
+
+Rule =
+  'ident'
+| 'token_ident'
+| Rule *
+| Rule ( '|' Rule) *
+| Rule '?'
+| Rule '*'
+| '(' Rule ')'
+| label:'ident' ':'
+      </textarea>
+      <textarea id="output" readonly></textarea>
+    </main>
+    <script type="module">
+      import init, { parse } from "/ungrammar-wasm/pkg/ungrammar_wasm.js";
+      init("/ungrammar-wasm/pkg/ungrammar_wasm_bg.wasm-opt.wasm")
+        .then(() => {
+          const $input = document.getElementById("input");
+          const $output = document.getElementById("output");
+          const convert = () => {
+            $output.textContent = JSON.stringify(
+              parse($input.value),
+              undefined,
+              2
+            );
+          };
+          $input.addEventListener("change", convert);
+          convert();
+        })
+        .catch(console.error);
+    </script>
+  </body>
+</html>
