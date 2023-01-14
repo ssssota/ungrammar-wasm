@@ -1,5 +1,6 @@
 {
   "scripts": {
-    "dev": "npx serve@latest"
+    "dev": "npx serve@latest",
+    "build": "cd ungrammar-wasm && wasm-pack build --target=web"
   }
 }

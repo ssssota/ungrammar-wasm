@@ -4,6 +4,8 @@ version = "0.1.0"
 authors = ["ssssota <tommysouta@gmail.com>"]
 edition = "2018"
 
+wasm-opt = false
+
 [lib]
 crate-type = ["cdylib", "rlib"]
 

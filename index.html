@@ -42,7 +42,7 @@ Rule =
     </main>
     <script type="module">
       import init, { parse } from "/ungrammar-wasm/pkg/ungrammar_wasm.js";
-      init("/ungrammar-wasm/pkg/ungrammar_wasm_bg.wasm-opt.wasm")
+      init()
         .then(() => {
           const $input = document.getElementById("input");
           const $output = document.getElementById("output");
